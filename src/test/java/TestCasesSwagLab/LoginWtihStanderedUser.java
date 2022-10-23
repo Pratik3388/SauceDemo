@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -38,25 +39,32 @@ public class LoginWtihStanderedUser extends DriverClass {
 	{
 		driver = OpenChrome.ChromeB();
 	}
-	@Test
-	public void withStanderedUserID() throws EncryptedDocumentException, IOException
+	
+	@DataProvider (name = "dataInput")
+	public Object[][] data()
+	{
+		return new Object[][] {{"standard_user","secret_sauce"},{"locked_out_user","secret_sauce"},{"problem_user","secret_sauce"},{"performance_glitch_user","secret_sauce"}};
+	}
+	
+	@Test (dataProvider = "dataInput")
+	public void withStanderedUserID(String name, String pass) throws EncryptedDocumentException, IOException
 	{
 		test = report1.createTest("withStanderedUserID");
 		SwagLoginPage logIn = new SwagLoginPage(driver);
-		logIn.enterUserId(1, 0);
-		logIn.enterPass(1, 1);
+		logIn.enterUserId(name);
+		logIn.enterPass(pass);
 		logIn.clickLogin();
 		String expectedResult = "https://www.saucedemo.com/inventory.html";
 		String actuleResult = driver.getCurrentUrl();
 		Assert.assertEquals(actuleResult, expectedResult, "Fail");
 	}
-	@Test
-	public void getTextError() throws EncryptedDocumentException, IOException
+	@Test (dataProvider = "dataInput")
+	public void getTextError(String name, String pass) throws EncryptedDocumentException, IOException
 	{
 		test = report1.createTest("getTextError");
 		SwagLoginPage logIn = new SwagLoginPage(driver);
-		logIn.enterUserId(3, 0);
-		logIn.enterPass(1, 1);
+		logIn.enterUserId(name);
+		logIn.enterPass(pass);
 		logIn.clickLogin();
 		String error = logIn.getErrorMSG();
 		System.out.println(error);

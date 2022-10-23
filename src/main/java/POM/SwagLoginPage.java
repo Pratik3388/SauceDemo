@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import UtilitySwagLab.ExpliciteWaitTill;
-import UtilitySwagLab.UserIdData;
+//import UtilitySwagLab.UserIdData;
 import pojo.DriverClass;
 
 public class SwagLoginPage extends DriverClass {
@@ -29,14 +29,15 @@ public class SwagLoginPage extends DriverClass {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void enterUserId(int row, int cell) throws EncryptedDocumentException, IOException {
+	public void enterUserId(String userName) throws EncryptedDocumentException, IOException {
 		ExpliciteWaitTill.waitTill(userId);
-		userId.sendKeys(UserIdData.Para(row, cell, "DataSwagLab"));
+		//userId.sendKeys(UserIdData.Para(row, cell, "DataSwagLab"));
+		userId.sendKeys(userName);
 	}
 
-	public void enterPass(int row,int cell) throws EncryptedDocumentException, IOException {
+	public void enterPass(String password) throws EncryptedDocumentException, IOException {
 		ExpliciteWaitTill.waitTill(pass);
-		pass.sendKeys(UserIdData.Para(row,cell, "DataSwagLab"));
+		pass.sendKeys(password);
 	}
 
 	public void clickLogin() {

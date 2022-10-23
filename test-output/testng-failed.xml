@@ -9,7 +9,8 @@
           <include name="report_status"/>
           <include name="reportLunch"/>
           <include name="fushReport"/>
-          <include name="getTextError"/>
+          <include name="getTextError" invocation-numbers="0 2 3"/>
+          <include name="withStanderedUserID" invocation-numbers="1"/>
         </methods>
       </class> <!-- TestCasesSwagLab.LoginWtihStanderedUser -->
     </classes>
